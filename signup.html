@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-[#030712]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Zing App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+    <script>
+        if (localStorage.getItem('zing_token')) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8 text-white relative">
+
+    <div class="orb-mint top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20"></div>
+
+    <div class="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in-up relative z-10">
+        <a href="index.html" class="flex justify-center items-center gap-2 text-3xl font-extrabold tracking-tight text-white mb-6 font-outfit">
+            <div class="w-10 h-10 rounded-xl bg-gradient-zing flex items-center justify-center shadow-lg shadow-purple-500/20">Z</div>
+            Zing
+        </a>
+        <h2 class="text-center text-3xl font-bold font-outfit">
+            Claim your handle
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-400 font-inter">
+            Already have a wallet? <a href="login.html" class="font-medium text-purple-400 hover:text-purple-300 transition hover:underline">Log in</a>
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md animate-fade-in-up delay-[100ms] relative z-10">
+        <div class="glass-card py-8 px-4 sm:rounded-3xl sm:px-10 shadow-2xl shadow-emerald-900/10">
+            <form id="signup-form" onsubmit="event.preventDefault(); initiateSignup();" class="space-y-5">
+                <div>
+                    <label class="form-label text-purple-400" for="signup-name">Desired @Username</label>
+                    <div class="mt-1 relative">
+                        <span class="absolute left-4 top-[14px] text-gray-500 font-bold">@</span>
+                        <input id="signup-name" type="text" required class="form-input pl-10 lowercase" placeholder="satoshi">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="form-label text-purple-400" for="signup-email">Backup Email</label>
+                    <div class="mt-1">
+                        <input id="signup-email" type="email" required class="form-input" placeholder="Recovery purposes only">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label text-purple-400" for="signup-password">Master Password</label>
+                    <div class="mt-1">
+                        <input id="signup-password" type="password" required class="form-input">
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" id="signup-btn" class="btn-primary w-full py-3.5 shadow-purple-500/30 font-inter uppercase tracking-widest text-sm text-white">
+                        Generate Identity
+                    </button>
+                </div>
+                
+                <div id="signup-error" class="hidden p-3 rounded-lg bg-red-900/20 text-red-500 border border-red-500/30 text-xs font-medium text-center font-inter"></div>
+            </form>
+            
+            <div class="mt-6 text-center text-[10px] text-gray-500 font-inter leading-relaxed tracking-wide">
+                By generating an identity, you agree to our Terms of Service. Zing is globally KYC compliant bridging Web2 and Web3.
+            </div>
+        </div>
+    </div>
+
+    <script src="connect.js"></script>
+    <script src="tracker.js"></script>
+</body>
+</html>

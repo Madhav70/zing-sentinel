@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#030712] text-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Intel | Zing Sentinel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-outfit { font-family: 'Outfit', sans-serif; }
+        .glass-card { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+        .status-verified { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .status-approx { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #374151; }
+    </style>
+</head>
+<body class="min-h-screen p-8 bg-[#030712]">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <div>
+                <h1 class="text-4xl font-extrabold font-outfit tracking-tight mb-2">Zing <span class="text-emerald-500">Sentinel</span></h1>
+                <p class="text-gray-500 text-sm font-medium uppercase tracking-widest">Global Visitor Intelligence & GPS Analytics</p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="fetchLogs()" class="px-6 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition font-bold text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                    Refresh Feed
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center md:text-left">
+            <div class="glass-card p-8 rounded-3xl">
+                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Total Pings</p>
+                <p id="stat-total" class="text-4xl font-extrabold font-outfit">0</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl border-l-4 border-l-emerald-500">
+                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Verified (GPS)</p>
+                <p id="stat-verified" class="text-4xl font-extrabold font-outfit text-emerald-400">0</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl border-l-4 border-l-orange-500">
+                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Approximate (IP)</p>
+                <p id="stat-approx" class="text-4xl font-extrabold font-outfit text-orange-400">0</p>
+            </div>
+        </div>
+
+        <!-- Logs Table -->
+        <div class="glass-card rounded-[32px] overflow-hidden border border-white/5">
+            <div class="p-6 border-b border-white/5 bg-white/5 font-outfit font-bold uppercase tracking-widest text-xs text-gray-400">
+                Live Geolocation Feed
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-[10px] text-gray-500 uppercase tracking-widest border-b border-white/5">
+                            <th class="px-6 py-4">Timestamp</th>
+                            <th class="px-6 py-4">Location</th>
+                            <th class="px-6 py-4">Coordinates</th>
+                            <th class="px-6 py-4">ISP / Network</th>
+                            <th class="px-6 py-4">Trust Level</th>
+                            <th class="px-6 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logs-body" class="divide-y divide-white/5">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Infrastructure -->
+    <script src="config.js"></script>
+    <script>
+            async function fetchLogs() {
+                if (!CONFIG || !CONFIG.SUPABASE_ANON_KEY || CONFIG.SUPABASE_ANON_KEY.includes('YOUR_')) {
+                    console.warn('Supabase Key missing in config.js');
+                    const body = document.getElementById('logs-body');
+                    body.innerHTML = '<tr><td colspan="7" class="text-center py-10 text-red-500">⚠️ Missing API Key in config.js</td></tr>';
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/location_logs?select=*&order=created_at.desc`, {
+                        headers: {
+                            'apikey': CONFIG.SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${CONFIG.SUPABASE_ANON_KEY}`
+                        }
+                    });
+                    const logs = await response.json();
+                    renderLogs(logs);
+                    updateStats(logs);
+                } catch (error) {
+                    console.error('Failed to fetch cloud logs:', error);
+                }
+            }
+
+        function renderLogs(logs) {
+            const body = document.getElementById('logs-body');
+            body.innerHTML = '';
+
+            let totalCount = logs.length;
+
+            logs.forEach(log => {
+                const isVerified = log.status === 'Verified';
+                if (isVerified) verifiedCount++;
+
+                const row = document.createElement('tr');
+                row.className = "hover:bg-white/[0.02] transition-colors group";
+                
+                const date = new Date(log.created_at).toLocaleString();
+                
+                row.innerHTML = `
+                    <td class="px-6 py-5 text-xs text-gray-500 font-mono">${date}</td>
+                    <td class="px-6 py-5">
+                        <div class="font-bold text-sm text-gray-200">${log.city || 'Unknown'}</div>
+                        <div class="text-[10px] text-gray-500">${log.country || 'Unknown'}</div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <div class="text-xs font-mono text-emerald-500">${parseFloat(log.lat).toFixed(5)}, ${parseFloat(log.lon).toFixed(5)}</div>
+                        <div class="text-[9px] text-gray-600">Accuracy: ±${log.acc || 0}m</div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <div class="text-[11px] text-gray-300 font-medium">${log.isp || 'Internal Network'}</div>
+                        <div class="text-[9px] text-gray-600 truncate max-w-[150px]">${log.user_agent || 'Bot'}</div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <span class="px-2.5 py-1 text-[9px] font-bold rounded-lg uppercase tracking-wider ${isVerified ? 'status-verified' : 'status-approx'}">
+                            ${log.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-5">
+                        <a href="https://www.google.com/maps?q=${log.lat},${log.lon}" target="_blank" class="text-blue-400 hover:text-blue-300 transition text-[10px] font-bold uppercase flex items-center gap-1.5 opacity-0 group-hover:opacity-100">
+                            View PIN 📍
+                        </a>
+                    </td>
+                `;
+                body.appendChild(row);
+            });
+
+            document.getElementById('stat-total').innerText = totalCount;
+            document.getElementById('stat-verified').innerText = verifiedCount;
+            document.getElementById('stat-approx').innerText = totalCount - verifiedCount;
+        }
+
+        window.onload = fetchLogs;
+        setInterval(fetchLogs, 10000); // Poll every 10s
+    </script>
+</body>
+</html>

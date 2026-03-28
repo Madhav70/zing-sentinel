@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-[#030712]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features | Zing App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="selection:bg-purple-900 selection:text-white relative overflow-x-hidden text-white">
+
+    <div class="orb-purple top-[-100px] left-[-200px]"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#030712]/80 backdrop-blur-xl border-b border-white/5 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            
+            <a href="index.html" class="flex items-center gap-2 text-2xl font-extrabold tracking-tight text-white font-outfit">
+                <div class="w-8 h-8 rounded-xl bg-gradient-zing flex items-center justify-center shadow-lg shadow-purple-500/20">Z</div>
+                Zing
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm text-gray-400">
+                <a href="index.html#how-it-works" class="hover:text-white transition">How it Works</a>
+                <a href="features.html" class="text-white font-bold transition">Features</a>
+                <a href="pricing.html" class="hover:text-white transition">Pricing</a>
+                <a href="about.html" class="hover:text-white transition">Company</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4" id="auth-container">
+                <a href="login.html" class="text-sm font-bold text-gray-300 hover:text-white transition px-3">Log in</a>
+                <a href="signup.html" class="btn-primary text-sm shadow-xl">Launch App</a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <main class="pt-40 pb-20 relative text-center border-b border-white/5">
+        <div class="max-w-3xl mx-auto px-6 animate-fade-in-up">
+            <h1 class="text-5xl lg:text-[4rem] font-extrabold tracking-tight text-white mb-6">
+                Web3 Power.<br>Web2 Simplicity.
+            </h1>
+            <p class="text-lg text-gray-400 font-inter">Zing removes the friction of blockchain networks, allowing anyone anywhere to send money across borders instantly using just an email address.</p>
+        </div>
+    </main>
+
+    <!-- Deep Dive Features Block -->
+    <section class="py-24 max-w-7xl mx-auto px-6">
+        
+        <!-- Feature 1 -->
+        <div class="grid md:grid-cols-2 gap-16 items-center mb-32">
+            <div>
+                <div class="inline-flex px-3 py-1 rounded bg-purple-900/30 border border-purple-500/30 text-purple-300 text-xs font-bold mb-6 tracking-widest uppercase">The Network</div>
+                <h2 class="text-3xl font-extrabold mb-4 font-outfit">Powered by USDC Stablecoins</h2>
+                <p class="text-gray-400 font-inter leading-relaxed mb-6">Traditional banks rely on SWIFT, which bounces your money between 3 intermediary banks. Zing tokenizes your fiat into USDC and routes it directly across Layer 2 blockchains.</p>
+                <ul class="space-y-4 font-inter text-gray-300 text-sm">
+                    <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_10px_2px_rgba(139,92,246,0.6)]"></div> 1:1 backed by real USD reserves</li>
+                    <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_2px_rgba(6,182,212,0.6)]"></div> Settles in 1.4 seconds (not 5 days)</li>
+                    <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_2px_rgba(16,185,129,0.6)]"></div> Zero intermediary banking fees</li>
+                </ul>
+            </div>
+            <div class="glass-card bg-[#0A0F1C] p-8 h-80 flex items-center justify-center relative overflow-hidden border border-white/10 shadow-[0_0_30px_-5px_rgba(139,92,246,0.1)]">
+                <div class="w-72 bg-gradient-zing shadow-2xl rounded-2xl border border-white/20 p-6 z-10 animate-float">
+                    <div class="flex items-center justify-between mb-2 opacity-80">
+                        <span class="text-xs font-bold uppercase tracking-widest flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white animate-ping"></div> On-Chain Transfer</span>
+                        <span>0x4f...8a</span>
+                    </div>
+                    <div class="w-full h-px bg-white/20 mb-4"></div>
+                    <p class="font-outfit text-3xl font-extrabold text-white tracking-tighter">$1,500 USDC</p>
+                    <p class="font-inter text-xs font-medium text-white/70 mt-1">Confirmed • Block 1840294</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 glass-card bg-[#0A0F1C] p-8 h-80 flex flex-col items-center justify-center border border-white/10 relative overflow-hidden">
+                <div class="w-64 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 animate-fade-in-up z-10">
+                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1 flex justify-between">
+                        <span>Send funds to</span> <span class="bg-gray-800 text-gray-300 px-1 rounded">@handle</span>
+                    </div>
+                    <input type="text" readonly value="@satoshinakamoto" class="w-full bg-white/5 border border-purple-500/50 rounded-lg p-2 text-white font-bold font-mon text-lg outline-none mb-3">
+                    <button class="btn-primary w-full py-2 shadow-sm text-sm justify-center">Authorize</button>
+                </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="inline-flex px-3 py-1 rounded bg-emerald-900/30 border border-emerald-500/30 text-emerald-400 text-xs font-bold mb-6 tracking-widest uppercase">The UX</div>
+                <h2 class="text-3xl font-extrabold mb-4 font-outfit">Universal Addressing</h2>
+                <p class="text-gray-400 font-inter leading-relaxed mb-6">Your identity is your wallet. You don't need to ask clients for a 16-digit Account number, an 11-digit IFSC, and a Swift code. Just send them a QR code or your email.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="connect.js"></script>
+    <script src="tracker.js"></script>
+</body>
+</html>

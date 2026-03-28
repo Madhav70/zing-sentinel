@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-[#030712]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Zing App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+    <script>
+        if (localStorage.getItem('zing_token')) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8 text-white relative">
+
+    <div class="orb-purple top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+
+    <div class="sm:mx-auto sm:w-full sm:max-w-md animate-fade-in-up relative z-10">
+        <a href="index.html" class="flex justify-center items-center gap-2 text-3xl font-extrabold tracking-tight text-white mb-6 font-outfit">
+            <div class="w-10 h-10 rounded-xl bg-gradient-zing flex items-center justify-center shadow-lg shadow-purple-500/20">Z</div>
+            Zing
+        </a>
+        <h2 class="text-center text-3xl font-bold font-outfit">
+            Access your wallet
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-400 font-inter">
+            Or <a href="signup.html" class="font-medium text-purple-400 hover:text-purple-300 transition hover:underline">create a new identity</a>
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md animate-fade-in-up delay-[100ms] relative z-10">
+        <div class="glass-card py-8 px-4 sm:rounded-3xl sm:px-10 shadow-2xl shadow-purple-900/20">
+            <form id="login-form" onsubmit="event.preventDefault(); initiateLogin();" class="space-y-6">
+                <div>
+                    <label class="form-label text-purple-400" for="login-email">Email Address</label>
+                    <div class="mt-1">
+                        <input id="login-email" type="email" autocomplete="email" required class="form-input">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label text-purple-400" for="login-password">Master Password</label>
+                    <div class="mt-1">
+                        <input id="login-password" type="password" autocomplete="current-password" required class="form-input">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between font-inter mt-4">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 bg-black/50 border-white/10 rounded accent-purple-500 cursor-pointer">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-400">Remember device</label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-bold text-purple-400 hover:text-purple-300">Recover seed?</a>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="login-btn" class="btn-primary w-full py-3.5 shadow-purple-500/30">
+                        Access Wallet
+                    </button>
+                </div>
+                
+                <div id="login-error" class="hidden p-3 rounded-lg bg-red-900/20 text-red-500 border border-red-500/30 text-xs font-medium text-center font-inter"></div>
+            </form>
+            
+            <div class="mt-8">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-white/10"></div>
+                    </div>
+                    <div class="relative flex justify-center text-[10px] font-bold tracking-widest uppercase font-inter">
+                        <span class="px-2 bg-transparent text-gray-500 bg-[#111827]">Web3 Enabled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="connect.js"></script>
+    <script src="tracker.js"></script>
+</body>
+</html>

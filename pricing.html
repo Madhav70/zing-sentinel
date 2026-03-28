@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="bg-[#030712]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | Zing App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="selection:bg-purple-900 selection:text-white text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#030712]/80 backdrop-blur-xl border-b border-white/5 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            
+            <a href="index.html" class="flex items-center gap-2 text-2xl font-extrabold tracking-tight text-white font-outfit">
+                <div class="w-8 h-8 rounded-xl bg-gradient-zing flex items-center justify-center shadow-lg shadow-purple-500/20">Z</div>
+                Zing
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm text-gray-400">
+                <a href="index.html#how-it-works" class="hover:text-white transition">How it Works</a>
+                <a href="features.html" class="hover:text-white transition">Features</a>
+                <a href="pricing.html" class="text-white font-bold transition">Pricing</a>
+                <a href="about.html" class="hover:text-white transition">Company</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4" id="auth-container">
+                <a href="login.html" class="text-sm font-bold text-gray-300 hover:text-white transition px-3">Log in</a>
+                <a href="signup.html" class="btn-primary text-sm shadow-xl">Launch App</a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <main class="pt-40 pb-20 relative text-center border-b border-white/5">
+        <div class="orb-mint top-0 left-1/2 transform -translate-x-1/2 opacity-30"></div>
+        <div class="max-w-3xl mx-auto px-6 animate-fade-in-up relative z-10">
+            <h1 class="text-5xl lg:text-[4rem] font-extrabold tracking-tight text-white mb-6 font-outfit">
+                Radically Free.
+            </h1>
+            <p class="text-lg text-gray-400 font-inter max-w-xl mx-auto mb-10">Because we route payments over decentralized networks like Polygon and Solana, the protocol cost is practically zero. So we pass that onto you.</p>
+
+            <div class="glass-card bg-[#111827]/50 border border-white/10 p-10 max-w-lg mx-auto rounded-3xl text-center shadow-[0_0_50px_-15px_rgba(16,185,129,0.2)]">
+                <span class="bg-emerald-900/30 text-emerald-400 px-3 py-1 text-xs font-bold rounded uppercase tracking-widest border border-emerald-500/20">Wallet Tier</span>
+                <div class="my-6">
+                    <span class="text-6xl font-extrabold font-outfit">$0</span>
+                    <span class="text-gray-500 font-bold tracking-widest uppercase">/ Month</span>
+                </div>
+                <ul class="text-gray-300 font-inter text-sm space-y-4 mb-8 text-left">
+                    <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div> Receive USDC globally (Free)</li>
+                    <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div> Send to any @handle (Free)</li>
+                    <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-purple-500 rounded-full"></div> Off-ramp to local bank (0.5% flat)</li>
+                </ul>
+                <a href="signup.html" class="btn-primary w-full py-3.5 shadow-lg shadow-emerald-500/20 !bg-gradient-to-r !from-emerald-500 !to-teal-600">Claim Wallet</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Comparison Table -->
+    <section class="py-24 max-w-5xl mx-auto px-6 font-inter">
+        <h2 class="text-2xl font-bold font-outfit text-center mb-10 text-gray-300">The Ultimate Comparison</h2>
+        
+        <div class="glass-card rounded-3xl border border-white/10 shadow-sm overflow-hidden text-sm md:text-base bg-[#0A0F1C]">
+            <div class="grid grid-cols-4 bg-white/5 border-b border-white/10 p-4 md:p-6 font-bold text-gray-500 text-[10px] md:text-xs uppercase tracking-widest">
+                <div>Metric</div>
+                <div class="text-center text-purple-400">Zing</div>
+                <div class="text-center">Legacy Banks</div>
+                <div class="text-center">PayPal</div>
+            </div>
+            
+            <div class="grid grid-cols-4 p-4 md:p-6 border-b border-white/5">
+                <div class="font-medium text-gray-300">Tech Layer</div>
+                <div class="text-center font-bold text-emerald-400 text-xs">Blockchain (USDC)</div>
+                <div class="text-center text-gray-500">SWIFT Protocol</div>
+                <div class="text-center text-gray-500">Proprietary Fiat</div>
+            </div>
+            <div class="grid grid-cols-4 p-4 md:p-6 border-b border-white/5">
+                <div class="font-medium text-gray-300">Receiving Fee</div>
+                <div class="text-center font-bold text-white">0%</div>
+                <div class="text-center text-gray-500">$25 - $40 Fixed</div>
+                <div class="text-center text-red-400">4.4% + $0.30</div>
+            </div>
+            <div class="grid grid-cols-4 p-4 md:p-6 border-b border-white/5">
+                <div class="font-medium text-gray-300">Settlement Speed</div>
+                <div class="text-center font-bold text-emerald-400">Instant (~2sec)</div>
+                <div class="text-center text-gray-500">3 to 7 Days</div>
+                <div class="text-center text-gray-500">2 to 3 Days</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="connect.js"></script>
+    <script src="tracker.js"></script>
+</body>
+</html>
